@@ -112,6 +112,9 @@ The script requires a dataset formatted according to the LLaVA specification. Th
 **Note:** We use a data packing strategy adapted from InternVL, where short instances are packed together while long instances are left unaltered to maximize GPU utilization. You can enable this feature by setting `--enable_data_packing True`.<br><br>
 **Tip:** The 3D convolution module in Qwen2.5-VL's visual encoding process can introduce NaN due to numeric stability. Please refer to src/train/monkey_patch_patch_emb.py.
 
+**Data**
+Please download the training data through [this link](https://drive.google.com/file/d/1RUbKMQU3H7u8iWDqpDv8aiYDMlUaDIlE/view?usp=sharing) where we provide formatted training data for Latent Visual Reasoning.
+
 To run the training script, use the following command:
 
 ### Stage-1 SFT

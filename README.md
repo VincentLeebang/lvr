@@ -43,6 +43,9 @@ pip install flash-attn --no-build-isolation
 **Note:** You should install flash-attn after installing the other packages.<br>
 **Note:** This project is forked from [Qwen2-VL-Finetune](https://github.com/2U1/Qwen2-VL-Finetune) where you can find more instructions on environments.
 
+## Model Checkpoints
+Model checkpoints are accessible from [vincentleebang/LVR-7B](https://huggingface.co/vincentleebang/LVR-7B)
+
 ## Dataset Preparation
 
 ### Data ###

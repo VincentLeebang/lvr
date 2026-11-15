@@ -1,0 +1,2 @@
+image_path,question,answer,x_min,y_min,x_max,y_max,image_width,image_height
+mac_demo/images/test.jpg,Which animals are visible in the image?,Three cats and one dog,515,113,1033,992,1522,1018

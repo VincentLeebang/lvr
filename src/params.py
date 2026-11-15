@@ -8,7 +8,7 @@ from trl import GRPOConfig as GRPOConfigTRL
 
 @dataclass
 class ModelArguments:
-    model_id: Optional[str] = field(default="Qwen/Qwen2-VL-7B-Instruct")
+    model_id: Optional[str] = field(default="Qwen/Qwen2.5-VL-7B-Instruct")
     # set continuous reasoning mode
     coconut: bool = field(default=True)
     lvr_head: bool = field(default=False)
@@ -31,7 +31,7 @@ class TrainingArguments(HFTrainingArguments):
     freeze_vision_tower: bool = field(default=False)
     freeze_llm: bool = field(default=False)
     freeze_merger: bool = field(default=False)
-    disable_flash_attn2: bool = field(default=False)
+    disable_flash_attn2: bool = field(default=True)
 
     max_seq_length: int = field(
         default=32768, # This is the default value of the qwen2-vl model
@@ -95,7 +95,7 @@ class GRPOArguments(GRPOConfigTRL):
     freeze_vision_tower: bool = field(default=False)
     freeze_llm: bool = field(default=False)
     freeze_merger: bool = field(default=False)
-    disable_flash_attn2: bool = field(default=False)
+    disable_flash_attn2: bool = field(default=True)
     double_quant: bool = field(
         default=True,
         metadata={"help": "Compress the quantization statistics through double quantization."}

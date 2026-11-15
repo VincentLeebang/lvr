@@ -58,7 +58,11 @@ from trl.trainer.utils import selective_log_softmax
 from trl import GRPOTrainer
 from trl.trainer.grpo_config import GRPOConfig
 from trl.models import create_reference_model, prepare_deepspeed, unwrap_model_for_generation
-from trl.import_utils import is_deepspeed_available, is_liger_kernel_available, is_rich_available
+from trl.import_utils import is_deepspeed_available, is_liger_kernel_available
+from importlib.util import find_spec
+
+def is_rich_available():
+    return find_spec("rich") is not None
 from trl.trainer.callbacks import SyncRefModelCallback
 
 from trl.extras.profiling import profiling_decorator, profiling_context

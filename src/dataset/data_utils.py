@@ -43,7 +43,7 @@ def replace_lvr_tokens(input_string,lvr_token_idxs_list,latent_end_token,fixed_n
                 output_segments.append(replacement+seg)
         else:
             for seg,idxs in zip(input_segments,lvr_token_idxs_list):
-                if latent_end_token is not None:    #latent end token mode will append a stopping token as the last
+                if latent_end_token:    #latent end token mode will append a stopping token as the last
                     replacement = LVR_START_TOKEN + LVR_TOKEN*len(idxs) + LVR_LATENT_END_TOKEN + LVR_END_TOKEN
                 else:
                     replacement = LVR_START_TOKEN + LVR_TOKEN*len(idxs) + LVR_END_TOKEN

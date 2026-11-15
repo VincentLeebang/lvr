@@ -149,22 +149,19 @@ def qwen2_5_mixed_modality_forward_lvr(
     if inputs_embeds is None:
         inputs_embeds = self.model.get_input_embeddings()(input_ids)
 
-    if lvr_mode_switch:
-        # only happen during inference
-        # in fact, each instance's seq_len will be 1 in inference
-        inputs_embeds[lvr_mode_switch,-1,:] = last_position_hidden_state[lvr_mode_switch]
+    if lvr_mode_switch is not None and last_position_hidden_state is not None:
+        inputs_embeds[lvr_mode_switch, -1, :] = (
+            last_position_hidden_state[lvr_mode_switch]
+        )
 
-    ''' 
-        only happen during inference 
-        inputs_embeds in shape (bs, seq_len, hidden)
-    '''
-    if last_position_hidden_state is not None:
-        # in fact, each instance's seq_len will be 1 in inference
-        inputs_embeds[lvr_mode_switch,-1,:] = last_position_hidden_state[lvr_mode_switch]
 
     '''Only necessary in training'''
     # Pass dummy image and dummy grid to the visual model to avoid deepspeed error.
-    if not lvr_mode_switch and (pixel_values is None and pixel_values_videos is None):
+    if (
+        (lvr_mode_switch is None or not lvr_mode_switch.any().item())
+        and pixel_values is None
+        and pixel_values_videos is None
+    ): 
         # Create dummy pixel_values and grid_thw for avoiding deepspeed error.
         dummy_pixel = torch.zeros(784, 1176).to(self.model.visual.device)
         dummy_grid = torch.tensor([[1, 28, 28]]).to(self.model.visual.device)
@@ -181,13 +178,6 @@ def qwen2_5_mixed_modality_forward_lvr(
         image_embeds = self.model.get_image_features(pixel_values, image_grid_thw)
         image_embeds = torch.cat(image_embeds, dim=0)
     
-        n_image_tokens = (input_ids == self.config.image_token_id).sum().item()
-        n_image_features = image_embeds.shape[0]
-        if n_image_tokens != n_image_features:
-            raise ValueError(
-                f"Image features and image tokens do not match: tokens: {n_image_tokens}, features {n_image_features}"
-            )
-
         if input_ids is None:
             image_mask = inputs_embeds == self.get_input_embeddings()(
                 torch.tensor(self.config.image_token_id, dtype=torch.long, device=inputs_embeds.device)
@@ -389,7 +379,7 @@ def qwen2_5_mixed_modality_forward_lvr_inference(
     if inputs_embeds is None:
         inputs_embeds = self.model.get_input_embeddings()(input_ids)
 
-    if last_position_hidden_state is not None:
+    if last_position_hidden_state is not None and lvr_mode_switch is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         # only happen during inference
         # in fact, each instance's seq_len will be 1 in inference
         inputs_embeds[lvr_mode_switch,-1,:] = last_position_hidden_state[lvr_mode_switch]
@@ -398,13 +388,13 @@ def qwen2_5_mixed_modality_forward_lvr_inference(
         only happen during inference 
         inputs_embeds in shape (bs, seq_len, hidden)
     '''
-    if last_position_hidden_state is not None:
+    if last_position_hidden_state is not None and lvr_mode_switch is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         # in fact, each instance's seq_len will be 1 in inference
         inputs_embeds[lvr_mode_switch,-1,:] = last_position_hidden_state[lvr_mode_switch]
 
     '''Only necessary in training'''
     # Pass dummy image and dummy grid to the visual model to avoid deepspeed error.
-    # if not lvr_mode_switch and (pixel_values is None and pixel_values_videos is None):
+    # if (lvr_mode_switch is None or not torch.as_tensor(lvr_mode_switch).bool().any().item()) and pixel_values is None and pixel_values_videos is None:
     #     # Create dummy pixel_values and grid_thw for avoiding deepspeed error.
     #     dummy_pixel = torch.zeros(784, 1176).to(self.model.visual.device)
     #     dummy_grid = torch.tensor([[1, 28, 28]]).to(self.model.visual.device)
@@ -421,13 +411,6 @@ def qwen2_5_mixed_modality_forward_lvr_inference(
         image_embeds = self.model.get_image_features(pixel_values, image_grid_thw)
         image_embeds = torch.cat(image_embeds, dim=0)
     
-        n_image_tokens = (input_ids == self.config.image_token_id).sum().item()
-        n_image_features = image_embeds.shape[0]
-        if n_image_tokens != n_image_features:
-            raise ValueError(
-                f"Image features and image tokens do not match: tokens: {n_image_tokens}, features {n_image_features}"
-            )
-
         if input_ids is None:
             image_mask = inputs_embeds == self.get_input_embeddings()(
                 torch.tensor(self.config.image_token_id, dtype=torch.long, device=inputs_embeds.device)
@@ -636,13 +619,13 @@ def qwen2_5_mixed_modality_forward_lvr_with_head(
         only happen during inference 
         inputs_embeds in shape (bs, seq_len, hidden)
     '''
-    if last_position_hidden_state is not None:
+    if last_position_hidden_state is not None and lvr_mode_switch is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         # in fact, each instance's seq_len will be 1 in inference
         inputs_embeds[lvr_mode_switch,-1,:] = last_position_hidden_state[lvr_mode_switch]
     
     ''' Only necessary in training '''
     # Pass dummy image and dummy grid to the visual model to avoid deepspeed error.
-    if not lvr_mode_switch and (pixel_values is None and pixel_values_videos is None):
+    if (lvr_mode_switch is None or not torch.as_tensor(lvr_mode_switch).bool().any().item()) and pixel_values is None and pixel_values_videos is None:
         # Create dummy pixel_values and grid_thw for avoiding deepspeed error.
         dummy_pixel = torch.zeros(784, 1176).to(self.model.visual.device)
         dummy_grid = torch.tensor([[1, 28, 28]]).to(self.model.visual.device)
@@ -662,13 +645,6 @@ def qwen2_5_mixed_modality_forward_lvr_with_head(
         image_embeds = self.model.get_image_features(pixel_values, image_grid_thw)
         image_embeds = torch.cat(image_embeds, dim=0)
 
-
-        n_image_tokens = (input_ids == self.config.image_token_id).sum().item()
-        n_image_features = image_embeds.shape[0]
-        if n_image_tokens != n_image_features:
-            raise ValueError(
-                f"Image features and image tokens do not match: tokens: {n_image_tokens}, features {n_image_features}"
-            )
 
         if input_ids is None:
             image_mask = inputs_embeds == self.get_input_embeddings()(
@@ -782,7 +758,7 @@ def qwen2_5_mixed_modality_forward_lvr_with_head(
     )
 
     '''apply lvr_head in training mode'''
-    if lvr_tokens is not None and lvr_mask.any():
+    if lvr_tokens is not None and lvr_mask is not None and lvr_mask.any().item():
         # batch_indices, seq_positions = torch.nonzero(lvr_mask, as_tuple=True)
         if len(batch_indices) > 0:
             # Get last hidden states for <lvr> token positions, starting <lvr_start>
@@ -790,7 +766,7 @@ def qwen2_5_mixed_modality_forward_lvr_with_head(
             outputs.last_hidden_state[batch_indices, seq_positions_start] = self.lvr_head(outputs.last_hidden_state[batch_indices, seq_positions_start])
 
     '''apply lvr_head in _inference mode'''
-    if lvr_mode_switch:
+    if lvr_mode_switch is not None and last_position_hidden_state is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         outputs.last_hidden_state[lvr_mode_switch,:,:] = self.lvr_head(outputs.last_hidden_state[lvr_mode_switch,:,:])
 
     hidden_states = outputs[0]
@@ -889,13 +865,13 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_inference(
         only happen during inference 
         inputs_embeds in shape (bs, seq_len, hidden)
     '''
-    if last_position_hidden_state is not None:
+    if last_position_hidden_state is not None and lvr_mode_switch is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         # in fact, each instance's seq_len will be 1 in inference
         inputs_embeds[lvr_mode_switch,-1,:] = last_position_hidden_state[lvr_mode_switch]
     
     ''' Only necessary in training '''
     # Pass dummy image and dummy grid to the visual model to avoid deepspeed error.
-    if not lvr_mode_switch and (pixel_values is None and pixel_values_videos is None):
+    if (lvr_mode_switch is None or not torch.as_tensor(lvr_mode_switch).bool().any().item()) and pixel_values is None and pixel_values_videos is None:
         # Create dummy pixel_values and grid_thw for avoiding deepspeed error.
         dummy_pixel = torch.zeros(784, 1176).to(self.model.visual.device)
         dummy_grid = torch.tensor([[1, 28, 28]]).to(self.model.visual.device)
@@ -915,13 +891,6 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_inference(
         image_embeds = self.model.get_image_features(pixel_values, image_grid_thw)
         image_embeds = torch.cat(image_embeds, dim=0)
 
-
-        n_image_tokens = (input_ids == self.config.image_token_id).sum().item()
-        n_image_features = image_embeds.shape[0]
-        if n_image_tokens != n_image_features:
-            raise ValueError(
-                f"Image features and image tokens do not match: tokens: {n_image_tokens}, features {n_image_features}"
-            )
 
         if input_ids is None:
             image_mask = inputs_embeds == self.get_input_embeddings()(
@@ -1036,7 +1005,7 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_inference(
     )
 
     '''apply lvr_head in training mode'''
-    if lvr_tokens is not None and lvr_mask.any():
+    if lvr_tokens is not None and lvr_mask is not None and lvr_mask.any().item():
         # batch_indices, seq_positions = torch.nonzero(lvr_mask, as_tuple=True)
         if len(batch_indices) > 0:
             # Get last hidden states for <lvr> token positions, starting <lvr_start>
@@ -1048,7 +1017,7 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_inference(
             # outputs.last_hidden_state[batch_indices, seq_positions_start] = lvr_head_output
 
     '''apply lvr_head in _inference mode'''
-    if lvr_mode_switch:
+    if lvr_mode_switch is not None and last_position_hidden_state is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         outputs.last_hidden_state[lvr_mode_switch,:,:] = self.lvr_head(outputs.last_hidden_state[lvr_mode_switch,:,:])
 
     hidden_states = outputs[0]
@@ -1146,13 +1115,13 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_with_modeSwitchLoss(
         only happen during inference 
         inputs_embeds in shape (bs, seq_len, hidden)
     '''
-    if lvr_mode_switch:
+    if lvr_mode_switch is not None and last_position_hidden_state is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         # in fact, each instance's seq_len will be 1 in inference
         inputs_embeds[lvr_mode_switch,-1,:] = last_position_hidden_state[lvr_mode_switch]
     
     ''' Only necessary in training '''
     # Pass dummy image and dummy grid to the visual model to avoid deepspeed error.
-    if not lvr_mode_switch and (pixel_values is None and pixel_values_videos is None):
+    if (lvr_mode_switch is None or not torch.as_tensor(lvr_mode_switch).bool().any().item()) and pixel_values is None and pixel_values_videos is None:
         # Create dummy pixel_values and grid_thw for avoiding deepspeed error.
         dummy_pixel = torch.zeros(784, 1176).to(self.model.visual.device)
         dummy_grid = torch.tensor([[1, 28, 28]]).to(self.model.visual.device)
@@ -1172,13 +1141,6 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_with_modeSwitchLoss(
         image_embeds = self.model.get_image_features(pixel_values, image_grid_thw)
         image_embeds = torch.cat(image_embeds, dim=0)
 
-
-        n_image_tokens = (input_ids == self.config.image_token_id).sum().item()
-        n_image_features = image_embeds.shape[0]
-        if n_image_tokens != n_image_features:
-            raise ValueError(
-                f"Image features and image tokens do not match: tokens: {n_image_tokens}, features {n_image_features}"
-            )
 
         if input_ids is None:
             image_mask = inputs_embeds == self.get_input_embeddings()(
@@ -1284,7 +1246,7 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_with_modeSwitchLoss(
     )
 
     '''apply lvr_head in training mode'''
-    if lvr_tokens and lvr_mask.any():
+    if lvr_tokens is not None and lvr_mask is not None and lvr_mask.any().item():
         # batch_indices, seq_positions = torch.nonzero(lvr_mask, as_tuple=True)
         if len(batch_indices) > 0:
             # Get last hidden states for <lvr> token positions, starting <lvr_start>
@@ -1292,7 +1254,7 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_with_modeSwitchLoss(
             outputs.last_hidden_state[batch_indices, seq_positions_start] = self.lvr_head(outputs.last_hidden_state[batch_indices, seq_positions_start])
 
     '''apply lvr_head in _inference mode'''
-    if lvr_mode_switch:
+    if lvr_mode_switch is not None and last_position_hidden_state is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         outputs.last_hidden_state[lvr_mode_switch,:,:] = self.lvr_head(outputs.last_hidden_state[lvr_mode_switch,:,:])
 
     hidden_states = outputs[0]
@@ -1411,13 +1373,13 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_with_latentEndToken(
         only happen during inference 
         inputs_embeds in shape (bs, seq_len, hidden)
     '''
-    if lvr_mode_switch:
+    if lvr_mode_switch is not None and last_position_hidden_state is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         # in fact, each instance's seq_len will be 1 in inference
         inputs_embeds[lvr_mode_switch,-1,:] = last_position_hidden_state[lvr_mode_switch]
     
     ''' Only necessary in training '''
     # Pass dummy image and dummy grid to the visual model to avoid deepspeed error.
-    if not lvr_mode_switch and (pixel_values is None and pixel_values_videos is None):
+    if (lvr_mode_switch is None or not torch.as_tensor(lvr_mode_switch).bool().any().item()) and pixel_values is None and pixel_values_videos is None:
         # Create dummy pixel_values and grid_thw for avoiding deepspeed error.
         dummy_pixel = torch.zeros(784, 1176).to(self.model.visual.device)
         dummy_grid = torch.tensor([[1, 28, 28]]).to(self.model.visual.device)
@@ -1437,13 +1399,6 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_with_latentEndToken(
         image_embeds = self.model.get_image_features(pixel_values, image_grid_thw)
         image_embeds = torch.cat(image_embeds, dim=0)
 
-
-        n_image_tokens = (input_ids == self.config.image_token_id).sum().item()
-        n_image_features = image_embeds.shape[0]
-        if n_image_tokens != n_image_features:
-            raise ValueError(
-                f"Image features and image tokens do not match: tokens: {n_image_tokens}, features {n_image_features}"
-            )
 
         if input_ids is None:
             image_mask = inputs_embeds == self.get_input_embeddings()(
@@ -1555,7 +1510,7 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_with_latentEndToken(
     )
 
     '''apply lvr_head in training mode'''
-    if lvr_tokens and lvr_mask.any():
+    if lvr_tokens is not None and lvr_mask is not None and lvr_mask.any().item():
         # batch_indices, seq_positions = torch.nonzero(lvr_mask, as_tuple=True)
         if len(batch_indices) > 0:
             # Get last hidden states for <lvr> token positions, starting <lvr_start>
@@ -1568,7 +1523,7 @@ def qwen2_5_mixed_modality_forward_lvr_with_head_with_latentEndToken(
 
 
     '''apply lvr_head in _inference mode'''
-    if lvr_mode_switch:
+    if lvr_mode_switch is not None and last_position_hidden_state is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         outputs.last_hidden_state[lvr_mode_switch,:,:] = self.lvr_head(outputs.last_hidden_state[lvr_mode_switch,:,:])
 
     hidden_states = outputs[0]
@@ -1677,13 +1632,13 @@ def qwen2_5_mixed_modality_forward_lvr_with_latentEndToken(
         only happen during inference 
         inputs_embeds in shape (bs, seq_len, hidden)
     '''
-    if lvr_mode_switch:
+    if lvr_mode_switch is not None and last_position_hidden_state is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         # in fact, each instance's seq_len will be 1 in inference
         inputs_embeds[lvr_mode_switch,-1,:] = last_position_hidden_state[lvr_mode_switch]
     
     ''' Only necessary in training '''
     # Pass dummy image and dummy grid to the visual model to avoid deepspeed error.
-    if not lvr_mode_switch and (pixel_values is None and pixel_values_videos is None):
+    if (lvr_mode_switch is None or not torch.as_tensor(lvr_mode_switch).bool().any().item()) and pixel_values is None and pixel_values_videos is None:
         # Create dummy pixel_values and grid_thw for avoiding deepspeed error.
         dummy_pixel = torch.zeros(784, 1176).to(self.model.visual.device)
         dummy_grid = torch.tensor([[1, 28, 28]]).to(self.model.visual.device)
@@ -1703,13 +1658,6 @@ def qwen2_5_mixed_modality_forward_lvr_with_latentEndToken(
         image_embeds = self.model.get_image_features(pixel_values, image_grid_thw)
         image_embeds = torch.cat(image_embeds, dim=0)
 
-
-        n_image_tokens = (input_ids == self.config.image_token_id).sum().item()
-        n_image_features = image_embeds.shape[0]
-        if n_image_tokens != n_image_features:
-            raise ValueError(
-                f"Image features and image tokens do not match: tokens: {n_image_tokens}, features {n_image_features}"
-            )
 
         if input_ids is None:
             image_mask = inputs_embeds == self.get_input_embeddings()(
@@ -1924,13 +1872,13 @@ def qwen2_5_mixed_modality_forward_lvr_rl(
         only happen during inference 
         inputs_embeds in shape (bs, seq_len, hidden)
     '''
-    if last_position_hidden_state is not None:
+    if last_position_hidden_state is not None and lvr_mode_switch is not None and torch.as_tensor(lvr_mode_switch).bool().any().item():
         # in fact, each instance's seq_len will be 1 in inference
         inputs_embeds[lvr_mode_switch,-1,:] = last_position_hidden_state[lvr_mode_switch]
     
     ''' Only necessary in training '''
     # Pass dummy image and dummy grid to the visual model to avoid deepspeed error.
-    if not lvr_mode_switch and (pixel_values is None and pixel_values_videos is None):
+    if (lvr_mode_switch is None or not torch.as_tensor(lvr_mode_switch).bool().any().item()) and pixel_values is None and pixel_values_videos is None:
         # Create dummy pixel_values and grid_thw for avoiding deepspeed error.
         dummy_pixel = torch.zeros(784, 1176).to(self.model.visual.device)
         dummy_grid = torch.tensor([[1, 28, 28]]).to(self.model.visual.device)
@@ -1950,13 +1898,6 @@ def qwen2_5_mixed_modality_forward_lvr_rl(
         image_embeds = self.model.get_image_features(pixel_values, image_grid_thw)
         image_embeds = torch.cat(image_embeds, dim=0)
 
-
-        n_image_tokens = (input_ids == self.config.image_token_id).sum().item()
-        n_image_features = image_embeds.shape[0]
-        if n_image_tokens != n_image_features:
-            raise ValueError(
-                f"Image features and image tokens do not match: tokens: {n_image_tokens}, features {n_image_features}"
-            )
 
         if input_ids is None:
             image_mask = inputs_embeds == self.get_input_embeddings()(

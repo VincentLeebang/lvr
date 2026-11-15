@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*.bak
+.venv/
+mac_demo/outputs/

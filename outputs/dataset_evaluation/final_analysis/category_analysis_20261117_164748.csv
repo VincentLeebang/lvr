@@ -1,0 +1,6 @@
+category,total,correct,partially_correct,incorrect,hallucinations,correct_percentage,partial_percentage,incorrect_percentage,hallucination_percentage
+Appearance Recognition,4,2,2,0,0,50.0,50.0,0.0,0.0
+Object Recognition,4,1,3,0,1,25.0,75.0,0.0,25.0
+Scene Understanding,4,0,4,0,3,0.0,100.0,0.0,75.0
+Spatial Reasoning,4,0,2,2,3,0.0,50.0,50.0,75.0
+Visual Counting,4,3,0,1,0,75.0,0.0,25.0,0.0

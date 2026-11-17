@@ -1,0 +1,6 @@
+category,number_of_samples,average_lexical_f1,average_inference_time_seconds
+Appearance Recognition,4,0.4139,1.482
+Object Recognition,4,0.4254,1.417
+Scene Understanding,4,0.1978,1.97
+Spatial Reasoning,4,0.5519,1.46
+Visual Counting,4,0.3702,2.584

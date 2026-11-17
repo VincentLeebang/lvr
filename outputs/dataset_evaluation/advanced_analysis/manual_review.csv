@@ -1,0 +1,21 @@
+﻿id,image,category,human_correctness,hallucination_check,review_notes
+1,image01.jpg,Visual Counting,Incorrect,No,Image has 10 animals; model gives no numerical count.
+2,image02.jpg,Spatial Reasoning,Partially Correct,No,"Ball is on grass, but answer omits that it is between the players in the foreground."
+3,image03.jpg,Object Recognition,Partially Correct,No,"Several objects identified, but eyeglasses and camera are omitted; notebook is called a book."
+4,image04.jpg,Spatial Reasoning,Partially Correct,Yes,"Coffee table and plant are mentioned, but a second sofa and some furniture positions appear invented or inaccurate."
+5,image05.jpg,Scene Understanding,Partially Correct,Yes,"Busy road, bus and motorcycle identified; details about a number 5 sign and bus markings appear unsupported."
+6,image06.jpg,Visual Counting,Correct,No,Correctly counts six apples.
+7,image07.jpg,Object Recognition,Correct,No,Correctly identifies books and a globe.
+8,image08.jpg,Appearance Recognition,Correct,No,Describes the elephant and zebra accurately.
+9,image09.jpg,Scene Understanding,Partially Correct,No,Identifies three people and a laptop; the activity is only partly described.
+10,image10.jpg,Appearance Recognition,Partially Correct,No,Identifies all bottle colours but omits their positions and dark caps.
+11,image11.jpg,Scene Understanding,Partially Correct,Yes,Recognizes an airplane at an airport but adds unverified aircraft type and inaccurate hangar details.
+12,image12.jpg,Object Recognition,Partially Correct,No,Recognizes houseplants but does not identify the visible plant types.
+13,image13.jpg,Visual Counting,Correct,No,Correctly identifies three parked cars.
+14,image14.jpg,Spatial Reasoning,Incorrect,Yes,Ball is above the player and to the right of the hoop; 'in front of the hoop' gives an incorrect spatial relation.
+15,image15.jpg,Appearance Recognition,Partially Correct,No,Identifies fruit names but omits their visible colours.
+16,image16.jpg,Scene Understanding,Partially Correct,Yes,"Recognizes lake, trees and snowy mountains; 'high altitude' is an unsupported inference."
+17,image17.jpg,Appearance Recognition,Correct,No,Correctly describes the round blue dial and silver watch.
+18,image18.jpg,Spatial Reasoning,Incorrect,Yes,"Board is at the front of the classroom, not on the left side."
+19,image19.jpg,Object Recognition,Partially Correct,Yes,"Identifies red, yellow and green signal parts but calls the lights cones."
+20,image20.jpg,Visual Counting,Correct,No,Correctly counts five people.

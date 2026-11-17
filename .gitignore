@@ -1,6 +1,31 @@
-.DS_Store
+# Python
 __pycache__/
 *.py[cod]
-*.bak
+*.egg-info/
+
+# Virtual environments
 .venv/
-mac_demo/outputs/
+venv/
+
+# Mac
+.DS_Store
+**/.DS_Store
+
+# Secrets
+.env
+.env.*
+
+# Editor settings
+.vscode/
+
+# Model checkpoints
+*.safetensors
+*.ckpt
+*.pth
+*.pt
+
+
+# Backup files
+*.bak
+*_backup.py
+evaluation/dataset_evaluation.py.

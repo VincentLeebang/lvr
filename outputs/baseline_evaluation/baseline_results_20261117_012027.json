@@ -1,0 +1,52 @@
+[
+    {
+        "test_number": 1,
+        "category": "Object Recognition",
+        "question": "Identify all the main objects visible in this image.",
+        "answer": "The image features three cats and a dog lying on the grass. The cat on the left is brown and appears to be a tabby cat. The cat in the middle is a mix of brown, white, and black, and it has a mane of fur. The cat on the right is gray and appears to be a tabby cat. The background of the image is blurry, but it seems to be a garden or outdoor setting with green foliage and some trees in the distance. The grass is lush and green, and the overall lighting is natural, suggesting that the photo was taken during the",
+        "inference_time_seconds": 8.159,
+        "process_peak_memory_mb": 1049.86,
+        "mps_memory_mb": 492.56,
+        "manual_review": ""
+    },
+    {
+        "test_number": 2,
+        "category": "Spatial Reasoning",
+        "question": "Describe the positions of the main objects in this image.",
+        "answer": "The image features three cats and a dog sitting on the grass. The cat on the left is brown and appears to be a tabby cat. The cat on the right is gray and appears to be a tabby cat. The cat on the right is black and appears to be a tabby cat. The dog on the right is brown and appears to be a brown and white cat.\n\nThe background of the image is blurry, but it appears to be a garden or outdoor setting with green grass and trees. The trees are tall and green, and the grass is lush and green. The",
+        "inference_time_seconds": 2.046,
+        "process_peak_memory_mb": 1049.86,
+        "mps_memory_mb": 492.56,
+        "manual_review": ""
+    },
+    {
+        "test_number": 3,
+        "category": "Scene Understanding",
+        "question": "Describe what is happening in this image.",
+        "answer": "The image depicts three cats lying on the grass. The cat on the left is brown and appears to be a domestic cat, characterized by its short fur and a white patch on its chest. The cat in the middle is a mix of brown and white, with a mix of fur colors including black, white, and brown. The cat on the right is gray and appears to be a mix of brown and white, with a mix of fur colors including black, white, and brown.\n\nThe background of the image is slightly blurred, which helps to focus the viewer's attention on the cats.",
+        "inference_time_seconds": 2.12,
+        "process_peak_memory_mb": 1049.86,
+        "mps_memory_mb": 492.56,
+        "manual_review": ""
+    },
+    {
+        "test_number": 4,
+        "category": "Visual Counting",
+        "question": "How many distinct animals or people are visible? Identify them.",
+        "answer": "3.",
+        "inference_time_seconds": 1.312,
+        "process_peak_memory_mb": 1049.86,
+        "mps_memory_mb": 492.56,
+        "manual_review": ""
+    },
+    {
+        "test_number": 5,
+        "category": "Appearance Recognition",
+        "question": "Describe the colors and appearance of the main objects.",
+        "answer": "The main objects in the image are a brown-colored dog and a cat. The dog is wearing a collar and is sitting on the grass. The cat is lying down on the grass. The background of the image is blurry, but it appears to be a garden or a park. There are trees and plants in the background.",
+        "inference_time_seconds": 1.639,
+        "process_peak_memory_mb": 1049.86,
+        "mps_memory_mb": 492.56,
+        "manual_review": ""
+    }
+]

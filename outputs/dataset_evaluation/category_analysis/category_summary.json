@@ -1,0 +1,32 @@
+[
+    {
+        "category": "Appearance Recognition",
+        "number_of_samples": 4,
+        "average_lexical_f1": 0.4139,
+        "average_inference_time_seconds": 1.482
+    },
+    {
+        "category": "Object Recognition",
+        "number_of_samples": 4,
+        "average_lexical_f1": 0.4254,
+        "average_inference_time_seconds": 1.417
+    },
+    {
+        "category": "Scene Understanding",
+        "number_of_samples": 4,
+        "average_lexical_f1": 0.1978,
+        "average_inference_time_seconds": 1.97
+    },
+    {
+        "category": "Spatial Reasoning",
+        "number_of_samples": 4,
+        "average_lexical_f1": 0.5519,
+        "average_inference_time_seconds": 1.46
+    },
+    {
+        "category": "Visual Counting",
+        "number_of_samples": 4,
+        "average_lexical_f1": 0.3702,
+        "average_inference_time_seconds": 2.584
+    }
+]

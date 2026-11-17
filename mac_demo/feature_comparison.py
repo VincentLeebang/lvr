@@ -10,7 +10,7 @@ from pathlib import Path
 # Project paths
 BASE_DIR = Path(__file__).resolve().parent
 IMAGE_PATH = BASE_DIR / "images" / "test.jpg"
-ROI_PATH = BASE_DIR / "outputs" / "roi_crop.jpg"
+ROI_PATH = BASE_DIR / "outputs" / "roi_crop_verified.png"
 OUTPUT_DIR = BASE_DIR / "outputs"
 
 OUTPUT_DIR.mkdir(exist_ok=True)

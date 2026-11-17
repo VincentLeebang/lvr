@@ -1,0 +1,6 @@
+category,number_of_samples,average_lexical_f1,exact_match_accuracy,counting_accuracy,average_inference_time_seconds
+Visual Counting,4,0.3702,0.0,1.0,2.584
+Spatial Reasoning,4,0.5519,0.0,N/A,1.46
+Object Recognition,4,0.4254,0.0,N/A,1.417
+Scene Understanding,4,0.1978,0.0,N/A,1.97
+Appearance Recognition,4,0.4139,0.0,N/A,1.482

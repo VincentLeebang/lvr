@@ -1,0 +1,70 @@
+{
+    "total_images_reviewed": 20,
+    "correct_predictions": 6,
+    "partially_correct_predictions": 11,
+    "incorrect_predictions": 3,
+    "correctness_percentages": {
+        "correct": 30.0,
+        "partially_correct": 55.0,
+        "incorrect": 15.0
+    },
+    "hallucination_flags": 7,
+    "hallucination_percentage": 35.0,
+    "category_analysis": {
+        "Appearance Recognition": {
+            "total": 4,
+            "correct": 2,
+            "partially_correct": 2,
+            "incorrect": 0,
+            "hallucinations": 0,
+            "correct_percentage": 50.0,
+            "partial_percentage": 50.0,
+            "incorrect_percentage": 0.0,
+            "hallucination_percentage": 0.0
+        },
+        "Object Recognition": {
+            "total": 4,
+            "correct": 1,
+            "partially_correct": 3,
+            "incorrect": 0,
+            "hallucinations": 1,
+            "correct_percentage": 25.0,
+            "partial_percentage": 75.0,
+            "incorrect_percentage": 0.0,
+            "hallucination_percentage": 25.0
+        },
+        "Scene Understanding": {
+            "total": 4,
+            "correct": 0,
+            "partially_correct": 4,
+            "incorrect": 0,
+            "hallucinations": 3,
+            "correct_percentage": 0.0,
+            "partial_percentage": 100.0,
+            "incorrect_percentage": 0.0,
+            "hallucination_percentage": 75.0
+        },
+        "Spatial Reasoning": {
+            "total": 4,
+            "correct": 0,
+            "partially_correct": 2,
+            "incorrect": 2,
+            "hallucinations": 3,
+            "correct_percentage": 0.0,
+            "partial_percentage": 50.0,
+            "incorrect_percentage": 50.0,
+            "hallucination_percentage": 75.0
+        },
+        "Visual Counting": {
+            "total": 4,
+            "correct": 3,
+            "partially_correct": 0,
+            "incorrect": 1,
+            "hallucinations": 0,
+            "correct_percentage": 75.0,
+            "partial_percentage": 0.0,
+            "incorrect_percentage": 25.0,
+            "hallucination_percentage": 0.0
+        }
+    }
+}

@@ -1,0 +1,28 @@
+[
+    {
+        "dataset": "custom_mac_demo",
+        "split": "train",
+        "question_id": 1,
+        "image": [
+            "mac_demo/images/test.jpg"
+        ],
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\nWhich animals are visible in the image?"
+            },
+            {
+                "from": "gpt",
+                "value": "<lvr>\n<answer> Three cats and one dog </answer>"
+            }
+        ],
+        "bboxes": [
+            [
+                0.3383705650459921,
+                0.11100196463654224,
+                0.6787122207621551,
+                0.9744597249508841
+            ]
+        ]
+    }
+]

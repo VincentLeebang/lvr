@@ -1,0 +1,143 @@
+
+[
+  {
+    "id": 1,
+    "image": "image01.jpg",
+    "category": "Visual Counting",
+    "question": "How many animals are visible in the image?",
+    "ground_truth": "There are 10 animals: five dogs and five cats."
+  },
+  {
+    "id": 2,
+    "image": "image02.jpg",
+    "category": "Spatial Reasoning",
+    "question": "Where is the football positioned relative to the players?",
+    "ground_truth": "The football is on the grass near the centre of the foreground, between the players."
+  },
+  {
+    "id": 3,
+    "image": "image03.jpg",
+    "category": "Object Recognition",
+    "question": "Which objects are visible on the wooden table?",
+    "ground_truth": "The objects include eyeglasses, a camera, a wristwatch, a wallet, a notebook, a calculator, keys, a pen and a smartphone."
+  },
+  {
+    "id": 4,
+    "image": "image04.jpg",
+    "category": "Spatial Reasoning",
+    "question": "Describe the positions of the main furniture items in the living room.",
+    "ground_truth": "A sofa is positioned against the back wall. A coffee table is in front of the sofa, with a plant on it. A floor lamp and potted plants are positioned to the right of the sofa."
+  },
+  {
+    "id": 5,
+    "image": "image05.jpg",
+    "category": "Scene Understanding",
+    "question": "Describe the traffic scene shown in the image.",
+    "ground_truth": "The image shows a busy urban road with cars, buses and motorcycles travelling along the road. Trees and buildings line the sides."
+  },
+  {
+    "id": 6,
+    "image": "image06.jpg",
+    "category": "Visual Counting",
+    "question": "How many apples are visible?",
+    "ground_truth": "There are six apples: four red apples and two green apples."
+  },
+  {
+    "id": 7,
+    "image": "image07.jpg",
+    "category": "Object Recognition",
+    "question": "What objects are arranged on the bookshelf?",
+    "ground_truth": "The bookshelf contains several books arranged vertically and a globe placed on the right side."
+  },
+  {
+    "id": 8,
+    "image": "image08.jpg",
+    "category": "Appearance Recognition",
+    "question": "Describe the visible appearance of the elephant and zebra.",
+    "ground_truth": "The elephant is large and grey with a trunk and tusks. The zebra has a black-and-white striped body."
+  },
+  {
+    "id": 9,
+    "image": "image09.jpg",
+    "category": "Scene Understanding",
+    "question": "What are the people doing in this image?",
+    "ground_truth": "Three students are gathered around a laptop, looking at its screen and interacting with each other."
+  },
+  {
+    "id": 10,
+    "image": "image10.jpg",
+    "category": "Appearance Recognition",
+    "question": "Describe the colours and appearance of the bottles.",
+    "ground_truth": "There are three similar water bottles. The left bottle is blue, the middle bottle is silver and the right bottle is red. All have dark caps."
+  },
+  {
+    "id": 11,
+    "image": "image11.jpg",
+    "category": "Scene Understanding",
+    "question": "Describe the scene at the airport.",
+    "ground_truth": "An airplane is positioned on the airport runway or apron near the terminal. An air traffic control tower is visible in the background during sunset."
+  },
+  {
+    "id": 12,
+    "image": "image12.jpg",
+    "category": "Object Recognition",
+    "question": "What types of plants are visible in the image?",
+    "ground_truth": "Several potted indoor plants are visible, including a broad-leaf green plant, a tall snake plant and a smaller leafy plant."
+  },
+  {
+    "id": 13,
+    "image": "image13.jpg",
+    "category": "Visual Counting",
+    "question": "How many cars are parked in the parking area?",
+    "ground_truth": "Three cars are parked side by side: a white car, a red car and a dark-coloured car."
+  },
+  {
+    "id": 14,
+    "image": "image14.jpg",
+    "category": "Spatial Reasoning",
+    "question": "Where is the basketball relative to the player and the hoop?",
+    "ground_truth": "The basketball is in the air above the player and to the right of the basketball hoop."
+  },
+  {
+    "id": 15,
+    "image": "image15.jpg",
+    "category": "Appearance Recognition",
+    "question": "Describe the fruits and their visible colours.",
+    "ground_truth": "The plate contains yellow bananas, green grapes, an orange and a red apple."
+  },
+  {
+    "id": 16,
+    "image": "image16.jpg",
+    "category": "Scene Understanding",
+    "question": "Describe the natural environment shown in the image.",
+    "ground_truth": "The image shows a mountain landscape with snow-covered peaks, evergreen trees and a clear lake reflecting the surrounding scenery."
+  },
+  {
+    "id": 17,
+    "image": "image17.jpg",
+    "category": "Appearance Recognition",
+    "question": "Describe the visible features of the wristwatch.",
+    "ground_truth": "The image shows a wristwatch with a round dark blue dial, silver metal case and silver metal strap. It has visible hands and hour markers."
+  },
+  {
+    "id": 18,
+    "image": "image18.jpg",
+    "category": "Spatial Reasoning",
+    "question": "Describe the positions of the board and desks in the classroom.",
+    "ground_truth": "The green board is positioned at the front of the classroom. Rows of desks and chairs are arranged facing the board."
+  },
+  {
+    "id": 19,
+    "image": "image19.jpg",
+    "category": "Object Recognition",
+    "question": "What are the three main parts of the traffic signal?",
+    "ground_truth": "The traffic signal has three circular lights arranged vertically: red at the top, yellow in the middle and green at the bottom."
+  },
+  {
+    "id": 20,
+    "image": "image20.jpg",
+    "category": "Visual Counting",
+    "question": "How many people are standing together in the image?",
+    "ground_truth": "Five people are standing together outdoors."
+  }
+]

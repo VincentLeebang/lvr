@@ -320,13 +320,12 @@ class SupervisedDatasetLVR(Dataset):
 
         attention_mask = (input_ids > -1000000).to(torch.long)
 
-        lvr_tokens = []
-        for item_img in lvr_token_idxs_list_manual:
-            group_lst = []
-            for group in item_img:
-                group_lst.append(torch.tensor(group))
-
-            lvr_tokens.append(group_lst)
+        # Convert each bounding-box token-index array into one 1D tensor.
+        # Each tensor represents one selected visual-token group.
+        lvr_tokens = [
+            torch.as_tensor(token_indices, dtype=torch.long)
+            for token_indices in lvr_token_idxs_list_manual
+        ]
 
         # lvr_token_idxs_list_manual_ = torch.tensor(np.array(lvr_token_idxs_list_manual))
 

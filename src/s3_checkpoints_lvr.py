@@ -314,5 +314,3 @@ class OCIFolderCheckpointHandler:
                 Bucket=self.bucket_name,
                 Key=file_path
             )
-
-if __name__ == "__main__":

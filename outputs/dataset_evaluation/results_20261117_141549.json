@@ -1,0 +1,38 @@
+{
+    "model": "SmolVLM-256M-Instruct",
+    "number_of_samples": 3,
+    "average_inference_time_seconds": 3.31,
+    "average_lexical_f1": 0.2981,
+    "results": [
+        {
+            "id": 1,
+            "image": "image01.jpg",
+            "category": "Object Recognition",
+            "question": "What are the main objects visible in this image?",
+            "ground_truth": "The image contains dogs and cats. There are five dogs and five cats arranged together against a white background.",
+            "prediction": "The image depicts a group of animals, specifically dogs and cats, positioned against a white background. The animals are arranged in a semi-circle formation, with the dog on the left and the cat on the right. The dogs are positioned on the left side of the image, while the cats are positioned on the right side.\n\nThe dogs are of various breeds and sizes, including a mix of short-haired and long-haired dogs, such as Labrador Retriever, Golden Retriever, and German Shepherd. The cats are of different breeds, including a Siamese cat,",
+            "inference_time_seconds": 6.565,
+            "lexical_f1": 0.2478
+        },
+        {
+            "id": 2,
+            "image": "image02.jpg",
+            "category": "Object Recognition",
+            "question": "Identify the main objects in this image.",
+            "ground_truth": "The main objects are people playing football, a football, grass, trees, and other people in the background.",
+            "prediction": "The image depicts a scene of a soccer match taking place on a grassy field. The players are engaged in a game of soccer, with the ball in the center of the image. The players are dressed in various types of athletic gear, including jerseys, shorts, and socks. The players are in different positions, some running, some kicking the ball, and some standing.\n\nIn the background, there are several spectators watching the game. The spectators are dressed in casual clothing, including shirts, shorts, and t-shirts. They are standing in groups, some of whom are holding up",
+            "inference_time_seconds": 1.972,
+            "lexical_f1": 0.1228
+        },
+        {
+            "id": 3,
+            "image": "image03.jpg",
+            "category": "Object Recognition",
+            "question": "Which objects are visible in the foreground?",
+            "ground_truth": "The foreground contains eyeglasses, a camera, a wristwatch, a wallet, a notebook, a calculator, keys, a pen, and a smartphone on a wooden table.",
+            "prediction": "There is a book, a pen, a watch, keys, a wallet, and a mobile phone in the foreground.",
+            "inference_time_seconds": 1.392,
+            "lexical_f1": 0.5238
+        }
+    ]
+}

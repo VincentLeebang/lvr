@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+
+# Mac
+.DS_Store
+**/.DS_Store
+
+# Secrets
+.env
+.env.*
+
+# Editor settings
+.vscode/
+
+# Model checkpoints
+*.safetensors
+*.ckpt
+*.pth
+*.pt
+
+
+# Backup files
+*.bak
+*_backup.py
+evaluation/dataset_evaluation.py.

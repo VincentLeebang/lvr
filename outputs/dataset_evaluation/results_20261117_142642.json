@@ -1,0 +1,208 @@
+{
+    "model": "SmolVLM-256M-Instruct",
+    "number_of_samples": 20,
+    "average_inference_time_seconds": 1.782,
+    "average_lexical_f1": 0.3918,
+    "results": [
+        {
+            "id": 1,
+            "image": "image01.jpg",
+            "category": "Visual Counting",
+            "question": "How many animals are visible in the image?",
+            "ground_truth": "There are 10 animals: five dogs and five cats.",
+            "prediction": "There are many animals in the image.",
+            "inference_time_seconds": 6.347,
+            "lexical_f1": 0.375
+        },
+        {
+            "id": 2,
+            "image": "image02.jpg",
+            "category": "Spatial Reasoning",
+            "question": "Where is the football positioned relative to the players?",
+            "ground_truth": "The football is on the grass near the centre of the foreground, between the players.",
+            "prediction": "The football is in the middle of the grass.",
+            "inference_time_seconds": 1.365,
+            "lexical_f1": 0.5833
+        },
+        {
+            "id": 3,
+            "image": "image03.jpg",
+            "category": "Object Recognition",
+            "question": "Which objects are visible on the wooden table?",
+            "ground_truth": "The objects include eyeglasses, a camera, a wristwatch, a wallet, a notebook, a calculator, keys, a pen and a smartphone.",
+            "prediction": "There is a book, a calculator, a watch, keys, a wallet, a mobile phone, and a pen on the table.",
+            "inference_time_seconds": 1.625,
+            "lexical_f1": 0.6
+        },
+        {
+            "id": 4,
+            "image": "image04.jpg",
+            "category": "Spatial Reasoning",
+            "question": "Describe the positions of the main furniture items in the living room.",
+            "ground_truth": "A sofa is positioned against the back wall. A coffee table is in front of the sofa, with a plant on it. A floor lamp and potted plants are positioned to the right of the sofa.",
+            "prediction": "The couch is positioned in the center of the room. There are two yellow pillows on the couch. To the left of the couch, there is a grey sofa with four cushions. To the right of the couch, there is a wooden coffee table with a potted plant on top of it. To the right of the coffee table, there is a tall plant.",
+            "inference_time_seconds": 1.718,
+            "lexical_f1": 0.5
+        },
+        {
+            "id": 5,
+            "image": "image05.jpg",
+            "category": "Scene Understanding",
+            "question": "Describe the traffic scene shown in the image.",
+            "ground_truth": "The image shows a busy urban road with cars, buses and motorcycles travelling along the road. Trees and buildings line the sides.",
+            "prediction": "The image depicts a busy urban street scene with several elements that contribute to the overall scene. The street is lined with several vehicles, including a bus, a motorcycle, and a few pedestrians. The bus is prominently displayed in the center of the image, with its front facing the camera. The bus is blue with a white stripe running horizontally across its body. The bus has a large number \"5\" displayed on its front, indicating it is a bus.\n\nTo the left of the bus, there is a blue and white sign with the number \"5\" in white. This sign is placed",
+            "inference_time_seconds": 1.97,
+            "lexical_f1": 0.1613
+        },
+        {
+            "id": 6,
+            "image": "image06.jpg",
+            "category": "Visual Counting",
+            "question": "How many apples are visible?",
+            "ground_truth": "There are six apples: four red apples and two green apples.",
+            "prediction": "6 are visible.",
+            "inference_time_seconds": 1.304,
+            "lexical_f1": 0.1429
+        },
+        {
+            "id": 7,
+            "image": "image07.jpg",
+            "category": "Object Recognition",
+            "question": "What objects are arranged on the bookshelf?",
+            "ground_truth": "The bookshelf contains several books arranged vertically and a globe placed on the right side.",
+            "prediction": "There are books and a globe on the bookshelf.",
+            "inference_time_seconds": 1.345,
+            "lexical_f1": 0.5833
+        },
+        {
+            "id": 8,
+            "image": "image08.jpg",
+            "category": "Appearance Recognition",
+            "question": "Describe the visible appearance of the elephant and zebra.",
+            "ground_truth": "The elephant is large and grey with a trunk and tusks. The zebra has a black-and-white striped body.",
+            "prediction": "The elephant and the zebra are both standing on the ground. The elephant is larger than the zebra. The elephant has a long trunk and tusks. The zebra has a long neck and a black and white striped coat.",
+            "inference_time_seconds": 1.572,
+            "lexical_f1": 0.5424
+        },
+        {
+            "id": 9,
+            "image": "image09.jpg",
+            "category": "Scene Understanding",
+            "question": "What are the people doing in this image?",
+            "ground_truth": "Three students are gathered around a laptop, looking at its screen and interacting with each other.",
+            "prediction": "The image depicts three people, two men and one woman, standing in front of a laptop. The woman is wearing a pink top with blue accents, and she is smiling at the camera. The man on the left is wearing a blue shirt and glasses, and he is also smiling. The man on the right is wearing a blue shirt and is also smiling.\n\nThe laptop is placed on a table or a desk, and it is open, with a screen visible. The woman is looking at the screen, and she has a focused expression. The man on the left is looking at the screen",
+            "inference_time_seconds": 1.98,
+            "lexical_f1": 0.1322
+        },
+        {
+            "id": 10,
+            "image": "image10.jpg",
+            "category": "Appearance Recognition",
+            "question": "Describe the colours and appearance of the bottles.",
+            "ground_truth": "There are three similar water bottles. The left bottle is blue, the middle bottle is silver and the right bottle is red. All have dark caps.",
+            "prediction": "The bottles are red, blue, and silver in colour.",
+            "inference_time_seconds": 1.343,
+            "lexical_f1": 0.4
+        },
+        {
+            "id": 11,
+            "image": "image11.jpg",
+            "category": "Scene Understanding",
+            "question": "Describe the scene at the airport.",
+            "ground_truth": "An airplane is positioned on the airport runway or apron near the terminal. An air traffic control tower is visible in the background during sunset.",
+            "prediction": "The image depicts an airplane on the tarmac at an airport. The airplane is a Boeing 737, a large commercial jet, and it is white in color. The airplane is positioned on the tarmac, which is a typical airport area. The tarmac is paved with asphalt and is clean, indicating that it is well-maintained.\n\nIn the background, there are two large hangars, which are typical of airport buildings. The hangars are cylindrical structures with a flat roof, and they are equipped with windows and control panels. The hangars are situated on the right",
+            "inference_time_seconds": 1.969,
+            "lexical_f1": 0.2353
+        },
+        {
+            "id": 12,
+            "image": "image12.jpg",
+            "category": "Object Recognition",
+            "question": "What types of plants are visible in the image?",
+            "ground_truth": "Several potted indoor plants are visible, including a broad-leaf green plant, a tall snake plant and a smaller leafy plant.",
+            "prediction": "There are houseplants in the image.",
+            "inference_time_seconds": 1.321,
+            "lexical_f1": 0.0741
+        },
+        {
+            "id": 13,
+            "image": "image13.jpg",
+            "category": "Visual Counting",
+            "question": "How many cars are parked in the parking area?",
+            "ground_truth": "Three cars are parked side by side: a white car, a red car and a dark-coloured car.",
+            "prediction": "There are three cars parked in the parking area.",
+            "inference_time_seconds": 1.345,
+            "lexical_f1": 0.2963
+        },
+        {
+            "id": 14,
+            "image": "image14.jpg",
+            "category": "Spatial Reasoning",
+            "question": "Where is the basketball relative to the player and the hoop?",
+            "ground_truth": "The basketball is in the air above the player and to the right of the basketball hoop.",
+            "prediction": "The basketball is in front of the hoop.",
+            "inference_time_seconds": 1.341,
+            "lexical_f1": 0.56
+        },
+        {
+            "id": 15,
+            "image": "image15.jpg",
+            "category": "Appearance Recognition",
+            "question": "Describe the fruits and their visible colours.",
+            "ground_truth": "The plate contains yellow bananas, green grapes, an orange and a red apple.",
+            "prediction": "The fruits and their visible colours are: Banana, Orange, Grapes, Apple, and Fruit.",
+            "inference_time_seconds": 1.429,
+            "lexical_f1": 0.3846
+        },
+        {
+            "id": 16,
+            "image": "image16.jpg",
+            "category": "Scene Understanding",
+            "question": "Describe the natural environment shown in the image.",
+            "ground_truth": "The image shows a mountain landscape with snow-covered peaks, evergreen trees and a clear lake reflecting the surrounding scenery.",
+            "prediction": "The image depicts a serene and picturesque landscape featuring a calm body of water, likely a lake or a pond, surrounded by lush green trees and a variety of tall, evergreen-like trees. The water is calm, reflecting the surrounding mountains and the sky above. The mountains are covered in snow, with some areas showing patches of snow, indicating a high altitude. The snow is reflective, giving the scene a mirror-like quality.\n\nIn the background, there is a range of mountains that rise up into a series of peaks, covered in snow. These mountains are distinct and appear to be part",
+            "inference_time_seconds": 1.963,
+            "lexical_f1": 0.2623
+        },
+        {
+            "id": 17,
+            "image": "image17.jpg",
+            "category": "Appearance Recognition",
+            "question": "Describe the visible features of the wristwatch.",
+            "ground_truth": "The image shows a wristwatch with a round dark blue dial, silver metal case and silver metal strap. It has visible hands and hour markers.",
+            "prediction": "The watch is made of stainless steel and silver in color. It has a blue face with white numbers and hands. The hands are small and black in color. The watch face is round and has a small shadow underneath it. The watch is on a wooden surface.",
+            "inference_time_seconds": 1.583,
+            "lexical_f1": 0.3288
+        },
+        {
+            "id": 18,
+            "image": "image18.jpg",
+            "category": "Spatial Reasoning",
+            "question": "Describe the positions of the board and desks in the classroom.",
+            "ground_truth": "The green board is positioned at the front of the classroom. Rows of desks and chairs are arranged facing the board.",
+            "prediction": "The board is on the left side of the image, and the desks are arranged in a row.",
+            "inference_time_seconds": 1.416,
+            "lexical_f1": 0.5641
+        },
+        {
+            "id": 19,
+            "image": "image19.jpg",
+            "category": "Object Recognition",
+            "question": "What are the three main parts of the traffic signal?",
+            "ground_truth": "The traffic signal has three circular lights arranged vertically: red at the top, yellow in the middle and green at the bottom.",
+            "prediction": "The traffic signal has a red cone, a yellow cone, and a green cone.",
+            "inference_time_seconds": 1.375,
+            "lexical_f1": 0.4444
+        },
+        {
+            "id": 20,
+            "image": "image20.jpg",
+            "category": "Visual Counting",
+            "question": "How many people are standing together in the image?",
+            "ground_truth": "Five people are standing together outdoors.",
+            "prediction": "There are five people standing together in the image.",
+            "inference_time_seconds": 1.339,
+            "lexical_f1": 0.6667
+        }
+    ]
+}

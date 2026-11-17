@@ -24,8 +24,6 @@ from torch.nn import functional as F
 
 
 from transformers.generation.configuration_utils import (
-    NEED_SETUP_CACHE_CLASSES_MAPPING,
-    QUANT_BACKEND_CLASSES_MAPPING,
     GenerationConfig,
     GenerationMode,
 )
@@ -56,46 +54,68 @@ from transformers.integrations.fsdp import is_fsdp_managed_module
 from src.model.lvr_heads import LVRHead, LVRHeadGLU
 
 class QwenWithLVR(Qwen2_5_VLForConditionalGeneration):
+    """
+    Qwen2.5-VL model extended with Latent Visual Reasoning components.
+    """
+
     def __init__(self, config):
         super().__init__(config)
-        if config.lvr_head:
-            self._init_lvr_head(config.lvr_head_type)
-        if config.latent_end_token:
+
+        if getattr(config, "lvr_head", False):
+            self._init_lvr_head(
+                getattr(config, "lvr_head_type", "simple")
+            )
+
+        if getattr(config, "latent_end_token", False):
             self._init_lvr_latent_end_emb()
-        
-    def _init_lvr_head(self,lvr_head_type):
+
+    def _init_lvr_head(self, lvr_head_type):
         print(f"Detected LVR Head Type: '{lvr_head_type}'")
-        if lvr_head_type == 'simple':
-            self.lvr_head = LVRHead(hidden_size=self.config.hidden_size)
-        elif lvr_head_type == 'glu':
-            self.lvr_head = LVRHeadGLU(hidden_size=self.config.hidden_size, 
-                                       intermediate_size=self.config.intermediate_size,
-                                       hidden_act=self.config.hidden_act)
+
+        # Qwen2.5-VL stores language-model dimensions in text_config.
+        text_config = self.config.text_config
+        hidden_size = text_config.hidden_size
+
+        if lvr_head_type == "simple":
+            self.lvr_head = LVRHead(
+                hidden_size=hidden_size
+            )
+
+        elif lvr_head_type == "glu":
+            self.lvr_head = LVRHeadGLU(
+                hidden_size=hidden_size,
+                intermediate_size=text_config.intermediate_size,
+                hidden_act=text_config.hidden_act,
+            )
+
         else:
-            # Raise an error for an unknown variant to prevent silent failures
-            raise ValueError(f"Unknown lvr_head_type: '{lvr_head_type}'. "
-                             "Supported variants are 'simple', 'glu'.")
+            raise ValueError(
+                f"Unknown lvr_head_type: '{lvr_head_type}'. "
+                "Supported variants are 'simple' and 'glu'."
+            )
+
         self.config.lvr_head_type = lvr_head_type
 
-        
     def _init_lvr_latent_end_emb(self):
+        print("Activated learnable latent end token of LVR")
 
-        print(f"Activated Learnable latent end token of LVR")
-        # Initializing the learnable latentend
-        # 2X norm to distinguish this from the normal semantic space
-        target_norm_scale_latentend = 1
+        # Match the dimension of the language model's hidden representation.
+        hidden_size = self.config.text_config.hidden_size
+        target_norm_scale_latentend = 1.0
+
         with torch.no_grad():
-            v = torch.randn(self.config.hidden_size, dtype=self.dtype, device=self.device)
+            v = torch.randn(
+                hidden_size,
+                dtype=self.dtype,
+                device=self.device,
+            )
             v = v / (v.norm() + 1e-6)
-            v = v * (target_norm_scale_latentend * math.sqrt(self.config.hidden_size))
+            v = v * (
+                target_norm_scale_latentend * math.sqrt(hidden_size)
+            )
+
         self.lvr_latent_end_emb = torch.nn.Parameter(v)
 
-        # lvr_latent_end_emb = torch.full(
-        #     (config.hidden_size,),
-        #     fill_value=1.0 / self.config.hidden_size
-        # )
-        # self.register_buffer('lvr_latent_end_emb', lvr_latent_end_emb)    # will not compute grad
-    
     # Patch the generation function with lvr_generate
     def generate(
         self,

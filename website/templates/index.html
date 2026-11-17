@@ -1,0 +1,642 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="LATENT-SIGHT - Visual Question Answering and Latent Visual Reasoning">
+
+    <title>LATENT-SIGHT | Visual Intelligence</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <!-- =====================================
+         NAVIGATION
+    ====================================== -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="/" class="brand">
+                <span class="brand-icon">L</span>
+                LATENT-SIGHT
+            </a>
+
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#analyzer">Image Analysis</a>
+                <a href="#about">About</a>
+            </div>
+
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                System Online
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================
+         HERO SECTION
+    ====================================== -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                AI-POWERED VISUAL INTELLIGENCE
+            </div>
+
+            <h1>
+                Understand Images.<br>
+                <span>Explore Visual Reasoning.</span>
+            </h1>
+
+            <p>
+                LATENT-SIGHT explores intelligent visual question answering
+                using bounding-box-guided latent visual reasoning.
+            </p>
+
+            <a href="#analyzer" class="hero-button">
+                Start Exploring <span>→</span>
+            </a>
+
+        </div>
+
+        <div class="hero-decoration">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="orbit-center">AI</div>
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         MAIN WORKSPACE
+    ====================================== -->
+
+    <main class="main-container" id="analyzer">
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+                INTERACTIVE WORKSPACE
+            </span>
+
+            <h2>Visual Analysis Studio</h2>
+
+            <p>
+                Upload an image and ask a question about its contents.
+            </p>
+
+        </div>
+
+
+        <div class="workspace">
+
+
+            <!-- =====================================
+                 IMAGE UPLOAD PANEL
+            ====================================== -->
+
+            <section class="panel upload-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <span class="step-number">01</span>
+                        <h3>Upload Image</h3>
+                    </div>
+
+                    <span class="panel-label">IMAGE INPUT</span>
+
+                </div>
+
+
+                <label
+                    for="imageInput"
+                    class="upload-area"
+                    id="uploadArea"
+                >
+
+                    <div class="upload-content" id="uploadContent">
+
+                        <div class="upload-icon">↑</div>
+
+                        <h4>Drop your image here</h4>
+
+                        <p>or click to browse files</p>
+
+                        <span>JPG, JPEG, PNG supported</span>
+
+                    </div>
+
+
+                    <img
+                        id="imagePreview"
+                        class="image-preview hidden"
+                        alt="Uploaded image preview"
+                    >
+
+                </label>
+
+
+                <input
+                    type="file"
+                    id="imageInput"
+                    accept="image/png,image/jpeg"
+                    hidden
+                >
+
+
+                <button
+                    type="button"
+                    id="removeImage"
+                    class="remove-button hidden"
+                >
+                    Remove Image
+                </button>
+
+            </section>
+
+
+            <!-- =====================================
+                 QUESTION PANEL
+            ====================================== -->
+
+            <section class="panel question-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <span class="step-number">02</span>
+                        <h3>Ask a Question</h3>
+                    </div>
+
+                    <span class="panel-label">QUERY INPUT</span>
+
+                </div>
+
+
+                <label
+                    for="questionInput"
+                    class="field-label"
+                >
+                    Your visual question
+                </label>
+
+
+                <textarea
+                    id="questionInput"
+                    placeholder="Example: What objects are visible in this image? Describe their positions."
+                    rows="6"
+                ></textarea>
+
+
+                <div class="question-hint">
+                    Ask anything related to the uploaded image.
+                </div>
+
+
+                <button
+                    type="button"
+                    id="analyzeButton"
+                    class="primary-button"
+                >
+                    <span>Analyze Image</span>
+                    <span>→</span>
+                </button>
+
+
+                <div
+                    id="message"
+                    class="message"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+            </section>
+
+        </div>
+
+
+        <!-- =====================================
+             ROI SELECTION PANEL
+        ====================================== -->
+
+        <section class="roi-section">
+
+            <div class="results-heading">
+
+                <div>
+                    <span class="section-tag">
+                        REGION OF INTEREST
+                    </span>
+
+                    <h2>Bounding Box Selection</h2>
+                </div>
+
+                <span class="result-indicator">
+                    ROI DEMO
+                </span>
+
+            </div>
+
+
+            <div class="panel">
+
+                <p class="question-hint">
+                    Draw a rectangle over the uploaded image to select
+                    the region you want to investigate.
+                </p>
+
+
+                <!-- ROI CANVAS -->
+
+                <div class="roi-canvas-container">
+
+                    <canvas id="roiCanvas"></canvas>
+
+                    <p id="roiEmpty" class="roi-empty">
+                        Upload an image to start selecting a region.
+                    </p>
+
+                </div>
+
+
+                <!-- ROI COORDINATES -->
+
+                <div class="roi-details">
+
+                    <div>
+                        <span class="panel-label">X MIN</span>
+                        <strong id="roiXMin">—</strong>
+                    </div>
+
+                    <div>
+                        <span class="panel-label">Y MIN</span>
+                        <strong id="roiYMin">—</strong>
+                    </div>
+
+                    <div>
+                        <span class="panel-label">X MAX</span>
+                        <strong id="roiXMax">—</strong>
+                    </div>
+
+                    <div>
+                        <span class="panel-label">Y MAX</span>
+                        <strong id="roiYMax">—</strong>
+                    </div>
+
+                </div>
+
+
+                <p id="roiDimensions" class="question-hint">
+                    No region selected.
+                </p>
+
+
+                <!-- =====================================
+                     QWEN TOKEN MAPPING BUTTON
+                ====================================== -->
+
+                <button
+                    type="button"
+                    id="mapTokensButton"
+                    class="primary-button"
+                >
+                    Generate Qwen Visual Token Mapping
+                </button>
+
+
+                <!-- =====================================
+                     TOKEN MAPPING RESULTS
+                ====================================== -->
+
+                <div
+                    id="tokenMappingResults"
+                    class="token-mapping-results hidden"
+                >
+
+                    <div class="results-heading">
+
+                        <div>
+                            <span class="section-tag">
+                                VISUAL TOKEN ANALYSIS
+                            </span>
+
+                            <h3>Qwen Visual Token Mapping</h3>
+                        </div>
+
+                        <span class="result-indicator">
+                            TOKEN OUTPUT
+                        </span>
+
+                    </div>
+
+
+                    <p class="question-hint">
+                        The selected bounding box is mapped to the
+                        merged visual-token grid produced by the
+                        Qwen2.5-VL image processor.
+                    </p>
+
+
+                    <!-- TOKEN STATISTICS -->
+
+                    <div class="token-stats">
+
+                        <div>
+                            <span class="panel-label">
+                                IMAGE GRID
+                            </span>
+
+                            <strong id="tokenImageGrid">—</strong>
+                        </div>
+
+
+                        <div>
+                            <span class="panel-label">
+                                MERGED GRID
+                            </span>
+
+                            <strong id="tokenMergedGrid">—</strong>
+                        </div>
+
+
+                        <div>
+                            <span class="panel-label">
+                                SELECTED TOKENS
+                            </span>
+
+                            <strong id="selectedTokenCount">—</strong>
+                        </div>
+
+
+                        <div>
+                            <span class="panel-label">
+                                MERGE SIZE
+                            </span>
+
+                            <strong id="tokenMergeSize">—</strong>
+                        </div>
+
+                    </div>
+
+
+                    <!-- ROI TOKEN GRID COORDINATES -->
+
+                    <h4>ROI Token Grid Coordinates</h4>
+
+                    <pre id="roiTokenGrid">Waiting for mapping...</pre>
+
+
+                    <!-- TOKEN INDICES -->
+
+                    <h4>Selected Token Indices</h4>
+
+                    <pre id="tokenIndices">Waiting for mapping...</pre>
+
+
+                    <!-- VISUAL TOKEN GRID -->
+
+                    <h4>Visual Token Grid</h4>
+
+                    <p class="question-hint">
+                        Cyan cells represent visual tokens selected
+                        by the bounding box.
+                    </p>
+
+
+                    <div
+                        id="tokenGridContainer"
+                        class="token-grid-container"
+                    >
+
+                        <p class="question-hint">
+                            Generate token mapping to display the grid.
+                        </p>
+
+                    </div>
+
+
+                    <!-- TOKEN GRID LEGEND -->
+
+                    <div class="token-grid-legend">
+
+                        <span>
+                            <i class="legend-box selected"></i>
+                            Selected ROI tokens
+                        </span>
+
+                        <span>
+                            <i class="legend-box unselected"></i>
+                            Other visual tokens
+                        </span>
+
+                    </div>
+
+
+                    <!-- MAPPING STATUS -->
+
+                    <p
+                        id="tokenMappingStatus"
+                        class="question-hint"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        Waiting for token mapping.
+                    </p>
+
+                </div>
+
+
+                <!-- CLEAR ROI -->
+
+                <button
+                    type="button"
+                    id="clearROI"
+                    class="remove-button"
+                >
+                    Clear Selection
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ANALYSIS RESULTS
+        ====================================== -->
+
+        <section class="results-section">
+
+            <div class="results-heading">
+
+                <div>
+                    <span class="section-tag">
+                        ANALYSIS OUTPUT
+                    </span>
+
+                    <h2>Reasoning Results</h2>
+                </div>
+
+                <span class="result-indicator">
+                    OUTPUT
+                </span>
+
+            </div>
+
+
+            <div class="results-panel" id="results">
+
+                <div class="empty-state" id="emptyState">
+
+                    <div class="empty-icon">◈</div>
+
+                    <h3>Waiting for image analysis</h3>
+
+                    <p>
+                        Upload an image and submit a question
+                        to see the analysis response here.
+                    </p>
+
+                </div>
+
+
+                <div id="resultContent" class="hidden">
+
+                    <div class="result-meta">
+
+                        <span>ANALYSIS RESPONSE</span>
+
+                        <span id="resultStatus">
+                            Received
+                        </span>
+
+                    </div>
+
+                    <p id="resultText"></p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         ABOUT SECTION
+    ====================================== -->
+
+    <section class="about-section" id="about">
+
+        <div class="section-heading">
+
+            <span class="section-tag">
+                ABOUT THE PROJECT
+            </span>
+
+            <h2>Inside LATENT-SIGHT</h2>
+
+            <p>
+                A research-oriented platform for exploring
+                visual understanding and latent reasoning.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">◉</div>
+
+                <h3>Visual Understanding</h3>
+
+                <p>
+                    Analyze images and explore visual information
+                    present in different regions.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">◇</div>
+
+                <h3>Latent Reasoning</h3>
+
+                <p>
+                    Investigate bounding-box-guided latent visual
+                    reasoning for visual question answering.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">▥</div>
+
+                <h3>Model Evaluation</h3>
+
+                <p>
+                    Explore model performance, reasoning quality
+                    and computational efficiency.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-brand">
+            LATENT-SIGHT
+        </div>
+
+        <p>
+            Exploring the future of visual intelligence.
+        </p>
+
+        <span>
+            © 2026 LATENT-SIGHT Research Project
+        </span>
+
+    </footer>
+
+
+    <!-- =====================================
+         MAIN JAVASCRIPT
+    ====================================== -->
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
